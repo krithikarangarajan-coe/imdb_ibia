@@ -50,7 +50,7 @@ Images Archive (IBIA)** and downloads without an account or login:
 Study pages (metadata):
 <https://ibdc.dbt.gov.in/ibia/study_details_browse/MAMOS_1000000004/> and
 <https://ibdc.dbt.gov.in/ibia/study_details_browse/MAMOS_1000000050/>.
-Also mirrored on MIDAS (access on request):
+Also available on MIDAS under a CC BY 4.0 licence (access on request):
 <https://www.midas.iisc.ac.in/fe/datasets/breast/breast-mammography>.
 
 ## Repository structure
@@ -129,11 +129,13 @@ authored here (`deidentification/`, `benchmarking/` wrappers). The third-party
 DEM toolkit invoked by the benchmarks is GPL-3.0 and is cloned at runtime, not
 included here.
 
-**Dataset (on IBIA): Open Access** under the DBT BIOTECH-PRIDE guidelines and
-FeED protocols. As confirmed by the IBIA/IBDC repository, this Open Access
-category is equivalent to CC BY (reuse and redistribution with attribution).
-Users accept the repository's data-use terms and applicable national regulations
-at the point of download.
+**Dataset: CC BY 4.0.** The dataset is available on MIDAS under an explicit
+Creative Commons Attribution 4.0 International (CC BY 4.0) licence
+(<https://creativecommons.org/licenses/by/4.0/>), and is distributed through the
+IBIA repository under the DBT BIOTECH-PRIDE "Open Access" framework (FeED
+protocols), which the IBIA/IBDC repository confirms is comparable to CC BY —
+reuse and redistribution with attribution. See [`DATASET_LICENSE.md`](DATASET_LICENSE.md)
+for details. Users accept the applicable repository's terms at the point of download.
 
 ## Contact
 
