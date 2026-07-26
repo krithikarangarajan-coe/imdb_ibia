@@ -50,12 +50,11 @@ python run_inference.py --backend mmdet --img-path IMDB_PNG --output mmdet_resul
 
 ## Inputs
 
-`--img-path` expects PNG (or JPG) images. Produce them from the downloaded
-DICOMs with the de-identification + conversion scripts:
+`--img-path` expects PNG (or JPG) images. The dataset downloaded from IBIA is
+already de-identified, so you only need to convert it to PNG:
 
 ```bash
-python ../deidentification/deidentify.py   --input RAW_DICOM --output DEID_DICOM --mapping-csv /secure/patient_mapping.csv
-python ../deidentification/dicom_to_png.py --input DEID_DICOM --output IMDB_PNG
+python ../deidentification/dicom_to_png.py --input IMDB_DICOM --output IMDB_PNG
 ```
 
 ## Files
