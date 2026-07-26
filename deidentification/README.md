@@ -1,9 +1,15 @@
 # De-identification and DICOM → PNG conversion
 
-Two steps that turn raw PACS DICOM exports into de-identified DICOM and then
-into PNG images for benchmarking.
+**The dataset released on IBIA is already fully de-identified.** If you have
+downloaded the dataset, you do **not** need `deidentify.py` — skip to
+`dicom_to_png.py`.
 
-## 1. `deidentify.py`
+`deidentify.py` is included to document, for transparency and reproducibility,
+how the data owners removed protected health information from the raw clinical
+DICOMs before uploading them to IBIA. It operates on original, identified
+clinical data and is not part of a downloader's workflow.
+
+## 1. `deidentify.py` (release provenance — owners only)
 
 Walks a nested per-patient DICOM tree, assigns sequential anonymous IDs
 (`pt_XXX`), renames files, clears the direct-identifier tags below, neutralises
@@ -42,7 +48,7 @@ provenance CSV (original size, scale, padding, manufacturer, photometric) so the
 geometric transform can be reversed.
 
 ```bash
-python dicom_to_png.py --input DEID_DICOM --output IMDB_PNG --img-size 0
+python dicom_to_png.py --input IMDB_DICOM --output IMDB_PNG --img-size 0
 ```
 
 The resulting PNGs are the input to `../benchmarking/run_inference.py`.
