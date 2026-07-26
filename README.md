@@ -1,25 +1,35 @@
 # IMDB — Indian Mammography DataBase
 
-De-identification, image-conversion, and benchmarking code for the **Indian
-Mammography DataBase (IMDB)**, a versioned open-access mammography resource
-curated from a screening-naive Indian population for artificial-intelligence
-research.
+De-identification (release provenance), image-conversion, and benchmarking code
+for the **Indian Mammography DataBase (IMDB)**, a versioned open-access
+mammography resource curated from a screening-naive Indian population for
+artificial-intelligence research.
 
 This repository accompanies the paper *"The Indian Mammography DataBase (IMDB):
 A Versioned Open Mammography Resource from a Screening-Naive Indian Population
-for Artificial Intelligence Research."* It provides the code to de-identify the
-DICOM data, convert it to PNG, and run baseline detector benchmarks. It does
-**not** train models — the benchmarks apply released weights from a third-party
-toolkit (see Benchmarking).
+for Artificial Intelligence Research."*
+
+**The dataset released on IBIA is already fully de-identified** — every DICOM
+downloaded from the repository has had protected health information removed. The
+`deidentification/` code is included for **transparency and reproducibility of
+the release process**; it documents how the raw clinical DICOMs were
+de-identified by the data owners before upload. Downloaders do **not** need to
+run it. A user's workflow is simply: download DICOMs → convert to PNG → run
+benchmarks. The benchmarks do **not** train models — they apply released weights
+from a third-party toolkit (see Benchmarking).
 
 ## Pipeline
 
+For anyone using the released dataset, only the last two steps apply; the first
+step describes how the owners prepared the data before upload.
+
 ```
-IBIA download (DICOM)
+Raw clinical DICOM  (owners only, before release)
       │
-      ▼   deidentification/deidentify.py      (remove PHI, assign pt_XXX, write mapping CSV)
-De-identified DICOM
-      │
+      ▼   deidentification/deidentify.py      (release provenance: PHI removal, pt_XXX, mapping CSV)
+De-identified DICOM  ── this is what IBIA distributes ──►  IBIA download
+                                                                │
+      ┌─────────────────────────────────────────────────────────┘
       ▼   deidentification/dicom_to_png.py    (VOI windowing → 8-bit PNG + provenance CSV)
 PNG images
       │
@@ -48,7 +58,7 @@ Also mirrored on MIDAS (access on request):
 ```
 imdb_ibia/
 ├── deidentification/
-│   ├── deidentify.py       # DICOM PHI removal (keeps age/sex); writes mapping CSV
+│   ├── deidentify.py       # release provenance: PHI removal from raw clinical DICOM (owners only)
 │   ├── dicom_to_png.py     # VOI-windowed DICOM → 8-bit PNG + provenance
 │   └── README.md
 └── benchmarking/
@@ -69,18 +79,20 @@ See [`benchmarking/README.md`](benchmarking/README.md) for setup and commands.
 
 ## Quick start
 
+Using the released (already de-identified) dataset downloaded from IBIA:
+
 ```bash
-# 1. De-identify (keep the mapping CSV private and outside the repo)
-python deidentification/deidentify.py --input RAW_DICOM --output DEID_DICOM \
-       --mapping-csv /secure/patient_mapping.csv
+# 1. Convert the downloaded de-identified DICOMs to PNG
+python deidentification/dicom_to_png.py --input IMDB_DICOM --output IMDB_PNG
 
-# 2. Convert to PNG
-python deidentification/dicom_to_png.py --input DEID_DICOM --output IMDB_PNG
-
-# 3. Benchmark (in the YOLO environment)
+# 2. Benchmark (in the YOLO environment)
 cd benchmarking
 python run_inference.py --backend yolo --img-path ../IMDB_PNG --output yolo_results.csv --plot
 ```
+
+The `deidentify.py` step is not part of this workflow — the downloaded data is
+already de-identified. That script is provided only to document how the owners
+prepared the raw clinical data before release.
 
 ## Third-party benchmarks and attribution
 
