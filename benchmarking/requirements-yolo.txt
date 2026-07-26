@@ -1,0 +1,8 @@
+# YOLO (Ultralytics) environment for run_inference.py --backend yolo
+# Use a SEPARATE environment from the MMDetection backend; their deps conflict.
+ultralytics==8.3.6
+numpy
+pandas
+pillow
+matplotlib
+# torch is pulled in by ultralytics; install a build matching your CUDA if needed.

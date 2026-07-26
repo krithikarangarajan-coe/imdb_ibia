@@ -1,0 +1,22 @@
+# MMDetection environment for run_inference.py --backend mmdet
+# Use a SEPARATE environment from the YOLO backend; their deps conflict.
+#
+# Versions mirror the Digital Eye for Mammography (DEM) toolkit
+# (Terzi et al., 2025), which these weights and configs come from:
+#   Python 3.8, PyTorch 1.12.1, CUDA 10.2-11.6, MMDetection 2.28.2, mmcv_full 1.7.1
+#
+# mmcv-full is installed via OpenMIM, NOT plain pip. Install order:
+#
+#   pip install -r requirements-mmdet.txt
+#   mim install mmcv_full==1.7.1
+#
+# (openmim provides the `mim` command used above.)
+
+torch==1.12.1
+torchvision==0.13.1
+mmdet==2.28.2
+openmim
+numpy
+pandas
+pillow
+matplotlib
