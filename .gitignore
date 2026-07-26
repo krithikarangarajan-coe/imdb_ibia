@@ -1,0 +1,29 @@
+# NEVER commit the re-identification key produced by deidentify.py
+patient_mapping.csv
+*mapping*.csv
+
+# Patient data / images
+*.dcm
+*.dicm
+*.png
+*.jpg
+*.jpeg
+
+# Model weights (downloaded at runtime)
+*.pt
+*.pth
+
+# Cloned third-party toolkit (GPL-3.0; do not vendor)
+digitaleye-mammography/
+
+# Provenance / result CSVs (regenerated)
+png_provenance.csv
+*_results.csv
+classification_results.png
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
